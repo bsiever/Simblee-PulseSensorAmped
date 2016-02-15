@@ -9,7 +9,6 @@
  *   Based on the algorithm and code available from: 
  *     https://github.com/WorldFamousElectronics/PulseSensor_Amped_Arduino
  *
- * v. 0.5
  */
 
 /*
@@ -38,6 +37,11 @@
 
 #include "Arduino.h"
 #include <inttypes.h>
+
+
+#if !defined(_VARIANT_SIMBLEE_)
+#error "PulseSensorAmped.h is only for use with Simblee-based boards"
+#endif
 
 // The "beats updated" callback; Called when valid pulse data is available. 
 // Passed Estimated Beats Per Minute and Interbeat Interval
