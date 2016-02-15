@@ -1,0 +1,23 @@
+#######################################
+# Syntax Coloring Map
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+PulseSensorAmped	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+start	KEYWORD2
+stop	KEYWORD2
+attach	KEYWORD2
+
+# 
+PulseSensorAmped_data	KEYWORD3        Setup   RESERVED_WORD
+PulseSensorAmped_lost	KEYWORD3        Setup   RESERVED_WORD
+#######################################
+# Constants (LITERAL1)
+#######################################
