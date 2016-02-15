@@ -2,28 +2,14 @@
  * Developed by Bill Siever (http://siever.info)
  * 
  * Based on http://pulsesensor.com/
+ * (Uses algorithm / code from https://github.com/WorldFamousElectronics/PulseSensor_Amped_Arduino/blob/master/PulseSensorAmped_Arduino_1dot4/Interrupt.ino)
  *
- * v. 0.5
  */
 
 /*
   PulseSensorAmped.h - Collect data from one (or more) Amped Pulse Sensors
   (http://pulsesensor.com/)
   Copyright (c) 2016 William Siever.  All right reserved.
-
-  This library is free software; you can redistribute it and/or
-  modify it under the terms of the GNU Lesser General Public
-  License as published by the Free Software Foundation; either
-  version 2.1 of the License, or (at your option) any later version.
-
-  This library is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-  Lesser General Public License for more details.
-
-  You should have received a copy of the GNU Lesser General Public
-  License along with this library; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #include "PulseSensorAmped.h"
@@ -144,10 +130,10 @@ void PulseSensorAmpedClass::update() {              // Update this ever 2ms
   }                                        
 
   // Search for a beat
-  if (elapsedTime > 250){                         // Assume at least 250ms between beats (i.e., BPM<240); Helps avoid noise
+  if(elapsedTime > 250){                         // Assume at least 250ms between beats (i.e., BPM<240); Helps avoid noise
 
     // See if the signal indicates the beginning of a pulse phase
-    if ( (signal > thresh) && (pulse == false) && beyondDichrotic){        
+    if((signal > thresh) && (pulse == false) && beyondDichrotic){        
       // A pulse phase has started 
       pulse = true;
 
@@ -174,7 +160,7 @@ void PulseSensorAmpedClass::update() {              // Update this ever 2ms
       word runningTotal = 0;
       word runningAmp = 0;
       int maxIndex = min(beatCount, 10);      
-      for(int i=0; i<maxIndex; i++){                
+      for(int i=0; i<maxIndex; i++) {
         runningTotal += rate[i];              
         runningAmp += amplitudes[i];
       }
@@ -190,7 +176,7 @@ void PulseSensorAmpedClass::update() {              // Update this ever 2ms
     }                       
   }
 
-  if (signal < thresh && pulse == true){      // when the values are going down the beat is over
+  if(signal < thresh && pulse == true) {      // when the values are going down the beat is over
     amplitude = peak - trough;                // Compute the amplitude of the last sample
     pulse = false;                            // Update status
     thresh = amplitude/2 + trough;            // Use 50% of the last amplitude as new threshold
