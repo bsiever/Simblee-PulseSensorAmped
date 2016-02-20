@@ -3,7 +3,7 @@
  */
 
 
-const int pulseSignalPin = 5;
+const int pulseSignalPin = 6;
 
 #include <PulseSensorAmped.h>
 

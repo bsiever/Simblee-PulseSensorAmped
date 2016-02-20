@@ -1,20 +1,21 @@
+
+
 /*
  * A SimbleeForMobile App for monitoring the user's pulse.
  */
-
-
 #include <SimbleeForMobile.h>
 #include <PulseSensorAmped.h>
 
 #include "HeartImage.h"
 
-const int pulseSignalPin = 5;
+const int pulseSignalPin = 6;
 uint8_t   pulseLabel;
 uint8_t   imageHandle;
 int updateTime;
 
 void setup() {
   SimbleeForMobile.advertisementData = "Pulse";
+  SimbleeForMobile.deviceName = "Pulse Sensor";
 
   // use a shared cache
   SimbleeForMobile.domain = "siever.info";
@@ -27,7 +28,6 @@ void setup() {
 
 
 void loop() {
-  //Simblee_ULPDelay(INFINITE);
   SimbleeForMobile.process();  
   PulseSensorAmped.process();
   if(SimbleeForMobile.updatable && updateTime && millis()-updateTime > 250) {
@@ -37,8 +37,6 @@ void loop() {
 }
 
 void ui() {
-  Serial.println("ui");
-  PulseSensorAmped.start();
   color_t darkgray = rgb(85,85,85);
   int width = SimbleeForMobile.screenWidth;
   int height = SimbleeForMobile.screenHeight;
