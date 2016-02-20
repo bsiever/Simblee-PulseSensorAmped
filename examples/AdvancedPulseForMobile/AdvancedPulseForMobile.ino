@@ -27,8 +27,6 @@ const static int PORTRAIT_VIEW = 1;
 const static int LANDSCAPE_VIEW = 2;
 
 void setup() {
-  Serial.begin(9600);
-  Serial.println("Starting");
   SimbleeForMobile.advertisementData = "Pulse";
 
   // use a shared cache
@@ -107,8 +105,6 @@ void drawLandscape() {
 }
 
 void ui() {
-  Serial.println("ui");
-
   if(SimbleeForMobile.screen == currentScreen) 
     return;
 
@@ -171,8 +167,6 @@ void PulseSensorAmped_lost(void) {
 
 void ui_event(event_t &event)
 {
-  Serial.print("Event: " );
-  Serial.println(event.id);
   switch(currentScreen) {
     case LANDSCAPE_VIEW:
       if(event.id == portraitButton) {
