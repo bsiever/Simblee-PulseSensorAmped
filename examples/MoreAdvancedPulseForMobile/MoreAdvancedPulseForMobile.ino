@@ -7,8 +7,9 @@
  *   1. Add this device to your Simblee Cloud account
  *   2. Create a pool with a unique ESN on your SimbleeCloud account.  
  *   3. Use the Pool ESN as the destESN in this sketch.
- *   4. Place the contents of the web directory on an appropriate server.
- *   5. Update "PulseDemoPage.html" with the Pool ESN
+ *   4. Update "web/PulseDemoPage.html" with the Pool ESN
+ *   5. Optional: Place the contents of the web directory on an appropriate server.
+ *   6. Open a browser to PulseDemoPage.html (either on a server or local)
  */
 #include <SimbleeForMobile.h>
 #include <BarGraph.h>
