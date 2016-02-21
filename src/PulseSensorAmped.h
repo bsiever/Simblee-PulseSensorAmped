@@ -37,6 +37,7 @@ class PulseSensorAmpedClass
 {
 public:
    PulseSensorAmpedClass();
+   void spoofedData(boolean spoof); // Use fake data (random numbers about 1 per sec)
    void attach(int pin);  // Use the given pin as the analog input channel
    void start(void);      // Start measuring beats
    void stop(void);       // Stop measuring beats
@@ -46,6 +47,7 @@ private:
    int analogPin;                   // Pin being used
 
   // Internal State variables
+   boolean  fakeData;               // Use fake data (for testing)
    volatile int BPM;                // Beats Per Minute (updated every 2ms)
    volatile int IBI;                // Inter Beat Interval
    unsigned long sampleCounter;     // used to determine pulse timing

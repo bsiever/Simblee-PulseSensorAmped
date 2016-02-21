@@ -1,0 +1,72 @@
+<!--
+  1. Create a Service in the SimbleeCloud Dashboard
+     The ESN should be used in the Simblee Sketch
+     The URL should be the location of these files.
+  2. Update the "myESN" below to be the ESN of the service
+     Update the "userID" to be your SimbleeCLoud User ID
+  3. Load the webpage!
+  4. Run the App / Trigger a Pulse
+-->
+
+<script src="Chart.js"></script>
+
+<h2>Pulse Demo Page</h2>
+
+<canvas id="myChart" width="40" height="10"></canvas><br>
+<div id=output></div><br>
+
+<script type="text/javascript" src="SimbleeCloud.js"></script>
+
+<script>
+var data = {
+    labels: [],
+    datasets: [
+        {
+            label: "Heart Rate",
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: []
+        }
+    ]
+};
+
+console.log("Created Chart");
+// Get the context of the canvas element we want to select
+var ctx = document.getElementById("myChart").getContext("2d");
+var myLineChart = new Chart(ctx).Line(data, {
+        scaleOverride : true,
+        scaleSteps : 16,
+        scaleStepWidth : 10,
+        scaleStartValue : 40,
+        responsive: true,
+        maintainAspectRatio: true
+    });
+
+console.log("Chart Created. Starting Cloud Service");
+var cloud = new SimbleeCloud();
+cloud.myESN =  0xXXXXXXXX;  // 00000001;
+cloud.userID = 0xXXXXXXXX;
+cloud.connect();
+
+//cloud.onactive = function() {
+//  output.innerHTML = "active";
+//}
+
+cloud.oninactive = function() {
+  output.innerHTML = "inactive";
+}
+
+console.log("Starting");
+cloud.onrequest = function(originESN, payload) {
+    console.log("Request");
+    var view = new DataView(payload);
+    var data = view.getUint8(0);
+    console.log(data);
+    myLineChart.addData([data],"");
+
+}
+</script>

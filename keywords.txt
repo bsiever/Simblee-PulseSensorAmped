@@ -14,7 +14,7 @@ PulseSensorAmped	KEYWORD1
 start	KEYWORD2
 stop	KEYWORD2
 attach	KEYWORD2
-
+spoofedData	KEYWORD2
 # 
 PulseSensorAmped_data	KEYWORD3        Setup   RESERVED_WORD
 PulseSensorAmped_lost	KEYWORD3        Setup   RESERVED_WORD
