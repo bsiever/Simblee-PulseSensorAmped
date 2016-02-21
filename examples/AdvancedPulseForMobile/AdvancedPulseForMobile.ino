@@ -1,6 +1,3 @@
-
-
-
 /*
  * A SimbleeForMobile App for monitoring the user's pulse w/ two screens and histogram.
  * 
@@ -37,6 +34,7 @@ void setup() {
   SimbleeForMobile.begin();
 
   PulseSensorAmped.attach(pulseSignalPin);
+  PulseSensorAmped.spoofedData(true);
 }
 
 
@@ -124,6 +122,7 @@ void ui() {
 
 void SimbleeForMobile_onConnect(void) {
   PulseSensorAmped.start();
+  currentScreen = -1;
 }
 
 void SimbleeForMobile_onDisconnect(void) {
@@ -152,7 +151,7 @@ void PulseSensorAmped_data(int BPM, int IBI) {
 // (Due to the nature of pulse detection via reflected light, spurios signals are possible. 
 //  i.e. received data may not be valid) 
 void PulseSensorAmped_lost(void) {
-  if(SimbleeForMobile.updatable)
+  if(SimbleeForMobile.updatable) {
     switch(currentScreen) {
         case PORTRAIT_VIEW:
           SimbleeForMobile.updateText(pulseLabel,"---");
@@ -162,6 +161,7 @@ void PulseSensorAmped_lost(void) {
           SimbleeForMobile.updateText(landScapePulseLabel,"---");
           break;
     }
+  }
 }
 
 

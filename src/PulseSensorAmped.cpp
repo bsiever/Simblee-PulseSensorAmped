@@ -116,19 +116,18 @@ void PulseSensorAmpedClass::stop(void) {
 void PulseSensorAmpedClass::update() {              // Update this ever 2ms
   static int rate[10];                         // array to average IBI values for average rate
   static int amplitudes[10];                   // array to average amplitude values for average rate
-  static int beatCount = 0;
+  static unsigned beatCount = 0;
 
   if(fakeData) {
     // Send an update once per second
-    if(beatCount == 500) {
+    if(beatCount >= 500) {
        if(random(100)<2) {
          BPM = -1;
-         postUpdate = true;
        } else {
         IBI = random(770,1100);
         BPM = 60000/IBI;        
-        postUpdate = true;
        }
+       postUpdate = true;
        beatCount = 0;
     }
     beatCount++;
