@@ -34,7 +34,7 @@ void setup() {
   SimbleeForMobile.begin();
 
   PulseSensorAmped.attach(pulseSignalPin);
-  PulseSensorAmped.spoofedData(true);
+  //PulseSensorAmped.spoofedData(true);
 }
 
 
@@ -110,11 +110,11 @@ void ui() {
   
   switch(currentScreen)
   {
-    case 1:
+    case PORTRAIT_VIEW:
       drawPortrait();
       break;
        
-    case 2:
+    case LANDSCAPE_VIEW:
       drawLandscape();
       break;
   }

@@ -1,14 +1,14 @@
-
-
-
 /*
  * A SimbleeForMobile App for monitoring the user's pulse w/ two screens and histogram.
  * 
  * This example reuires the BarGraph library: https://github.com/bsiever/SimbleeForMobile-BarGraph
+ * 
  * This example requires an appropriate configured SimbleeCloud account:
- *   1. Add this device
- *   2. Place the contents of the web directory on an appropriate server.
- *   3. Create a service with a unique ESN
+ *   1. Add this device to your Simblee Cloud account
+ *   2. Create a pool with a unique ESN on your SimbleeCloud account.  
+ *   3. Use the Pool ESN as the destESN in this sketch.
+ *   4. Place the contents of the web directory on an appropriate server.
+ *   5. Update "PulseDemoPage.html" with the Pool ESN
  */
 #include <SimbleeForMobile.h>
 #include <BarGraph.h>
@@ -19,8 +19,8 @@
 #include "HeartImage.h"
 
 // your user id from the admin.simbleecloud.com (required to authorize the module)
-const unsigned userID =  0xXXXXXXXX;
-const unsigned destESN = 0xXXXXXXXX; // 0x00000001; 
+const unsigned userID =  0xXXXXXXXX;  
+const unsigned destESN = 0xXXXXXXXX;  // 00000001;
 
 SimbleeForMobileClient client;
 SimbleeCloud cloud(&client);
@@ -56,6 +56,7 @@ void setup() {
   cloud.userID = userID;
 
   PulseSensorAmped.attach(pulseSignalPin);
+  //PulseSensorAmped.spoofedData(true);
 }
 
 
@@ -126,7 +127,10 @@ void drawLandscape() {
 }
 
 void ui() {
-  cloud.connect();
+  if(cloud.connect())
+    printf("Cloud Connected\n");
+  else 
+    printf("No Cloud service\n");
   
   if(SimbleeForMobile.screen == currentScreen) 
     return;
@@ -135,11 +139,11 @@ void ui() {
   
   switch(currentScreen)
   {
-    case 1:
+    case PORTRAIT_VIEW:
       drawPortrait();
       break;
        
-    case 2:
+    case LANDSCAPE_VIEW:
       drawLandscape();
       break;
   }
@@ -147,6 +151,7 @@ void ui() {
 
 void SimbleeForMobile_onConnect(void) {
   PulseSensorAmped.start();
+  currentScreen = -1;
 }
 
 void SimbleeForMobile_onDisconnect(void) {
@@ -157,6 +162,8 @@ void SimbleeForMobile_onDisconnect(void) {
 void PulseSensorAmped_data(int BPM, int IBI) {
   if(cloud.active()) {
      cloud.send(destESN, &BPM, sizeof(BPM));
+  } else {
+    printf("Cloud not active for update");
   }
   if(SimbleeForMobile.updatable) {
     switch(currentScreen) {
