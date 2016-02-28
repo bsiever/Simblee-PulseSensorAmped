@@ -36,7 +36,7 @@ uint8_t   landScapePulseLabel;
 
 int updateTime;
 int currentScreen;
-BarGraph pulseHistory(240,250);
+BarGraph pulseHistory(60,250);
 
 const static int PORTRAIT_VIEW = 1;
 const static int LANDSCAPE_VIEW = 2;
@@ -45,6 +45,7 @@ void setup() {
   Serial.begin(9600);
   printf("Module ESN is 0x%08x\n", cloud.myESN);
   SimbleeForMobile.advertisementData = "Pulse";
+  SimbleeForMobile.deviceName = "Pulser3";
 
   // use a shared cache
   SimbleeForMobile.domain = "siever.info";
@@ -57,6 +58,8 @@ void setup() {
   cloud.userID = userID;
 
   PulseSensorAmped.attach(pulseSignalPin);
+
+  // Use "false" data (for development / testing)
   //PulseSensorAmped.spoofedData(true);
 }
 

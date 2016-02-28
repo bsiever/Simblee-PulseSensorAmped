@@ -15,7 +15,7 @@ int updateTime;
 
 void setup() {
   SimbleeForMobile.advertisementData = "Pulse";
-  SimbleeForMobile.deviceName = "Pulse Sensor";
+  SimbleeForMobile.deviceName = "Pulser1";
 
   // use a shared cache
   SimbleeForMobile.domain = "siever.info";

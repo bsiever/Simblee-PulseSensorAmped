@@ -18,13 +18,14 @@ uint8_t   landScapePulseLabel;
 
 int updateTime;
 int currentScreen;
-BarGraph pulseHistory(240,250);
+BarGraph pulseHistory(60,250);
 
 const static int PORTRAIT_VIEW = 1;
 const static int LANDSCAPE_VIEW = 2;
 
 void setup() {
   SimbleeForMobile.advertisementData = "Pulse";
+  SimbleeForMobile.deviceName = "Pulser2";
 
   // use a shared cache
   SimbleeForMobile.domain = "siever.info";
@@ -34,7 +35,7 @@ void setup() {
   SimbleeForMobile.begin();
 
   PulseSensorAmped.attach(pulseSignalPin);
-  //PulseSensorAmped.spoofedData(true);
+  PulseSensorAmped.spoofedData(true);
 }
 
 
