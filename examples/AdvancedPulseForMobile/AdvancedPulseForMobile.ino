@@ -25,7 +25,7 @@ const static int LANDSCAPE_VIEW = 2;
 
 void setup() {
   SimbleeForMobile.advertisementData = "Pulse";
-  SimbleeForMobile.deviceName = "Pulser2";
+  SimbleeForMobile.deviceName = "Pls-";
 
   // use a shared cache
   SimbleeForMobile.domain = "siever.info";
@@ -35,6 +35,10 @@ void setup() {
   SimbleeForMobile.begin();
 
   PulseSensorAmped.attach(pulseSignalPin);
+  
+  // NOTE: This uses artificial data by default.  
+  //       Disable this line to use sensor data 
+  //       (This allows easy testing of callbacks)
   PulseSensorAmped.spoofedData(true);
 }
 

@@ -1,5 +1,3 @@
-
-
 /*
  * A SimbleeForMobile App for monitoring the user's pulse.
  */

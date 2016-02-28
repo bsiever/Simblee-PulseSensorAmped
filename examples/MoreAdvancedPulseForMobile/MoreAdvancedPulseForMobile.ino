@@ -59,8 +59,10 @@ void setup() {
 
   PulseSensorAmped.attach(pulseSignalPin);
 
-  // Use "false" data (for development / testing)
-  //PulseSensorAmped.spoofedData(true);
+  // NOTE: This uses artificial data by default.  
+  //       Disable this line to use sensor data 
+  //       (This allows easy testing of callbacks)
+  PulseSensorAmped.spoofedData(true);
 }
 
 
@@ -217,5 +219,4 @@ void ui_event(event_t &event)
       }      
       break;
   }
-  
 }
