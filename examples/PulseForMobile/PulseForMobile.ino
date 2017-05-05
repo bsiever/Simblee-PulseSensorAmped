@@ -22,6 +22,11 @@ void setup() {
   SimbleeForMobile.begin();
 
   PulseSensorAmped.attach(pulseSignalPin);
+
+  // NOTE: This uses artificial data by default.  
+  //       Disable this line to use sensor data 
+  //       (Using it allows easy testing of callbacks)
+  PulseSensorAmped.spoofedData(true);
 }
 
 

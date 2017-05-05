@@ -50,7 +50,7 @@ static void timer(unsigned int ms)                                 // directly p
   NRF_TIMER2->CC[0] = (ms * 31) + (ms / 4);                                                                                  //CC[0] register holds interval count value i.e your desired cycle
   NRF_TIMER2->INTENSET = TIMER_INTENSET_COMPARE0_Enabled << TIMER_INTENSET_COMPARE0_Pos;                                     // Enable COMAPRE0 Interrupt
   NRF_TIMER2->SHORTS = (TIMER_SHORTS_COMPARE0_CLEAR_Enabled << TIMER_SHORTS_COMPARE0_CLEAR_Pos);                             // Count then Complete mode enabled
-  attachInterrupt(TIMER2_IRQn, TIMER2_Interrupt);                                                                            // also used in variant.cpp in the RFduino2.2 folder to configure the RTC1 
+  dynamic_attachInterrupt(TIMER2_IRQn, TIMER2_Interrupt);                                                                            // also used in variant.cpp in the RFduino2.2 folder to configure the RTC1 
 }
 
 // Timer 2 interrupt triggers a pulse beat update
